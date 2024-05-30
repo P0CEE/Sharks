@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!
+{% endblock %}
+
+{% block body %}
+	<div x-data="{ open: false }" class="mx-auto max-w-lg pt-12">
+		<div>
+			<div class="text-center">
+				<img class="mx-auto h-12 w-12" src="{{ asset('images/sharks.png') }}" alt="Sharks">
+				<h2 class="mt-2 text-base font-semibold leading-6 text-white">Add a sharks</h2>
+				<p class="mt-1 text-sm text-gray-500">It's the administrators who decide who to add. This is where they can manage the community sharks who make the most content, and decide to remove existing sharks if necessary.</p>
+			</div>
+			<form action="#" class="mt-6 flex">
+				<label for="email" class="sr-only">Username X</label>
+				<input type="email" name="email" id="email" class="block w-full px-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter an X username">
+				<button type="submit" class="ml-4 flex-shrink-0 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Send it</button>
+			</form>
+		</div>
+		<div class="mt-10">
+			<h3 class="text-sm font-medium text-gray-500">$SC Content creator previously added to projects</h3>
+
+			<ul role="list" class="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
+				{% for user in users %}
+					<li class="flex items-center justify-between space-x-3 py-4">
+						<div class="flex min-w-0 flex-1 items-center space-x-3">
+							<div class="flex-shrink-0">
+								<img class="h-10 w-10 rounded-full" src="{{ asset('images/x/sharkcat.jpg') }}" alt="@SharkCatSolana">
+							</div>
+							<div class="min-w-0 flex-1">
+								<p class="truncate text-sm font-medium text-white">{{ user.username }}</p>
+								<p class="truncate text-sm font-medium text-gray-500">@SharkCatSolana</p>
+							</div>
+						</div>
+						<div class="flex-shrink-0">
+							<button type="button" class="inline-flex items-center gap-x-1.5 text-sm font-semibold leading-6 text-red-400" @click="open = true">
+								<svg class="h-5 w-5 text-gray-400" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+									<path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"></path>
+								</svg>
+								<span class="sr-only">@SharkCatSolana</span>
+							</button>
+						</div>
+					</li>
+					{{ include('_slide_sharks.html.twig') }}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+{% endblock %}

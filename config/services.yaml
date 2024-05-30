@@ -20,5 +20,20 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Service\ApiClient:
+        arguments:
+            $client: '@http_client'
+    
+    App\Service\CryptoPriceService:
+        arguments:
+            $apiKey: '%env(COINGECKO_API_KEY)%'
+    
+    App\EventListener\UserPointsEventListener:
+        arguments:
+            $pointRepository: '@App\Repository\PointRepository'
+            $entityManager: '@doctrine.orm.entity_manager'
+        tags:
+            - { name: kernel.event_listener, event: 'user.points.updated', method: 'onUserPointsUpdated' }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
